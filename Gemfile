@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
-
 gem 'rails-api', '0.1.0'
+gem 'devise','3.1.1'
 
 group :development, :test do
   gem 'rspec-rails', '2.14.0'
