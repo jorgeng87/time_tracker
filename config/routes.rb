@@ -1,5 +1,5 @@
 TimeTracker::Application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { sessions: "sessions" }
   resources :trackings, except: [:new, :edit]
   resources :users, except: [:new, :edit]
 
