@@ -15,6 +15,19 @@ describe SessionsController do
     end
 
     describe "with invalid params" do
+
+      it "should return a HTTP 401 code if the user doesn't exist" do
+        post :create, username: "tooth.fairy@example.com", password: "abcd"
+
+        response.status.should == 401 # Unauthorized
+      end
+
+      it "should return a HTTP 401 code if the password is wrong" do
+        user = create(:user, password: "12345678")
+        post :create, username: user.email, password: "abcd"
+
+        response.status.should == 401 # Unauthorized
+      end
     end
 
   end
