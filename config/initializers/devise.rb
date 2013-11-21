@@ -223,7 +223,7 @@ Devise.setup do |config|
   # should add them to the navigational formats lists.
   #
   # The "*/*" below is required to match Internet Explorer requests.
-  # config.navigational_formats = ['*/*', :html]
+  config.navigational_formats = []
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete
@@ -241,6 +241,7 @@ Devise.setup do |config|
     manager.intercept_401 = false
     manager.strategies.add(:multiple_tokens_strategy, Devise::Strategies::MultipleTokensStrategy)
     manager.default_strategies(:scope => :user).unshift :multiple_tokens_strategy
+    manager.failure_app = CustomFailure
   end
 
   # ==> Mountable engine configurations
