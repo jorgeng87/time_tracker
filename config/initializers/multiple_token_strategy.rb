@@ -10,7 +10,8 @@ module Devise
         user_token = AuthToken.find_by_token(params[:auth_token])
 
         if user_token
-          if user_token.user
+          user = user_token.user
+          if user
             user.after_database_authentication
             success!(user)
           end
