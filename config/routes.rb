@@ -1,7 +1,7 @@
 TimeTracker::Application.routes.draw do
-  devise_for :users, controllers: { sessions: "sessions" }
-  resources :trackings, except: [:new, :edit]
-  resources :users, except: [:new, :edit]
+  devise_for :users, controllers: { sessions: "sessions" }, defaults: { format: :json }
+  resources :trackings, except: [:new, :edit], defaults: { format: :json }
+  #resources :users, except: [:new, :edit]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
