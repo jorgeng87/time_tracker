@@ -17,7 +17,7 @@ describe TrackingsController do
     describe "with invalid params" do
       it 'should require authentication' do
         post 'create', valid_params 
-        binding.pry
+        response.status.should == 401 # Unauthorized
       end
     end
   end
