@@ -2,5 +2,7 @@
 
 FactoryGirl.define do
   factory :auth_token do
+    token "AuthenticationToken"
+    user
   end
 end
