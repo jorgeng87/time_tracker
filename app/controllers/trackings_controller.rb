@@ -4,9 +4,9 @@ class TrackingsController < ApplicationController
   # GET /trackings
   # GET /trackings.json
   def index
-    @trackings = Tracking.all
+    trackings = Tracking.find_all_by_user_id(current_user)
 
-    render json: @trackings
+    render json: trackings
   end
 
   # GET /trackings/1
@@ -45,7 +45,7 @@ class TrackingsController < ApplicationController
     return render json: {}, status: 403 if tracking.user != current_user
 
     if tracking.update(tracking_params[:tracking])
-      head :no_content
+      head :no_content # 204
     else
       render json: tracking.errors, status: 422 # Unprocessable Entity
     end
@@ -54,9 +54,14 @@ class TrackingsController < ApplicationController
   # DELETE /trackings/1
   # DELETE /trackings/1.json
   def destroy
-    @tracking = Tracking.find(params[:id])
-    @tracking.destroy
+    tracking = Tracking.find_by_id(params[:id])
 
-    head :no_content
+    return render json: {}, status: 403 if tracking.user != current_user
+
+    if tracking.destroy
+      head :no_content # 204
+    else
+      render json: tracking.errors, status: 422 # Unprocessable Entity
+    end
   end
 end
