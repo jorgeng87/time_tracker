@@ -4,7 +4,7 @@ class TrackingsController < ApplicationController
   # GET /trackings
   # GET /trackings.json
   def index
-    trackings = Tracking.find_all_by_user_id(current_user)
+    trackings = Tracking.where(user:current_user)
 
     render json: trackings
   end
