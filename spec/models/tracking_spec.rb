@@ -2,12 +2,13 @@
 #
 # Table name: trackings
 #
-#  id         :integer          not null, primary key
-#  start      :datetime
-#  stop       :datetime
-#  user_id    :integer
-#  created_at :datetime
-#  updated_at :datetime
+#  id          :integer          not null, primary key
+#  start       :datetime
+#  stop        :datetime
+#  user_id     :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#  description :text
 #
 
 require 'spec_helper'
