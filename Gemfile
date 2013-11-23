@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
-gem 'rails-api', '0.1.0'
+gem 'rails-api', git: 'https://github.com/rails-api/rails-api.git', branch: 'master'
 gem 'devise','3.1.1'
 
 group :development, :test do
