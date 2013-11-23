@@ -12,25 +12,42 @@ class TrackingsController < ApplicationController
   # GET /trackings/1
   # GET /trackings/1.json
   def show
-    @tracking = Tracking.find(params[:id])
+    tracking = Tracking.find_by_id(params[:id])
 
-    render json: @tracking
+    return render json: {}, status: 404 unless tracking
+    return render json: {}, status: 403 if tracking.user != current_user
+
+    render json: tracking , status: 200
   end
 
   # POST /trackings
   # POST /trackings.json
   def create
+    tracking_params = params.require(:tracking).permit(:start, :stop, :description)
+
+    tracking = Tracking.create(tracking_params)
+    tracking.user = current_user
+    if tracking.save
+      render json: { id: tracking.id }, status: 201
+    else
+      render json: {}, status: 400
+    end
   end
 
   # PATCH/PUT /trackings/1
   # PATCH/PUT /trackings/1.json
   def update
-    @tracking = Tracking.find(params[:id])
+    tracking_params = params.require(:tracking).permit(:start, :stop, :description)
 
-    if @tracking.update(params[:tracking])
+    tracking = Tracking.find_by_id(params[:id])
+    return render json: {}, status: 404 unless tracking
+
+    return render json: {}, status: 403 if tracking.user != current_user
+
+    if tracking.update(tracking_params[:tracking])
       head :no_content
     else
-      render json: @tracking.errors, status: :unprocessable_entity
+      render json: tracking.errors, status: 422 # Unprocessable Entity
     end
   end
 
